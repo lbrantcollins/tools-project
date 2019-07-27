@@ -9,11 +9,11 @@ Tool rental portal.
 
 ### Customer
 
-##### Register (choose username and password)
+#### Register (choose username and password)
 
-##### Log in (use username and password)
+#### Log in (use username and password)
 
-##### The user's home page will display
+#### The user's home page will display
 
   * Most recent three active user rentals, if any
       * A link to the list of all active user rentals
@@ -24,14 +24,14 @@ Tool rental portal.
     * Three most recent prior user rentals, if any
       * A Link to list of all prior user rentals
 
-##### Current rentals and rental history pages
+#### Current rentals and rental history pages
     
   * from either the landing page or rental list pages (current and prior)
     * clicking on a product will take user to the rental page
       * a link to the product page
       * a link to an account page
 
-##### Product pages 
+#### Product pages 
 
   * Full catalog
     * display all items with small photo, title (and cost?)
@@ -39,7 +39,7 @@ Tool rental portal.
     * each item has a link to a more detailed product page
   * Clicking on a product will take user to the product information page
 
-##### Rental page
+#### Rental page
 
   * rental start date
   * due date
@@ -47,34 +47,35 @@ Tool rental portal.
   * cost (or balance due for prior unpaid or current, but late rentals)
 
 
-##### Account page
+#### Account page
 
   * total balance due
   * ????
   * ????
   * make a payment
 
-##### Site navigation
+#### Site navigation
 
   * The navigation bar will be available from any page and provide the user with links to
     * full catalog
     * rentals
-      * current and prior rentals pages
-      * rental page for each item
-    * ????
-    * ????
+      * current rentals
+      * provides links to a rental page for each item
+    * history
+      * prior rentals
+      * provides to a rental page for each item
     * User's first name
-    # Balance due (or credit)
+    * Balance due (or credit), can link to payment page from here
 
 ### Administrator (user)
 
-##### Log in (use username and password seeded to the database)
+#### Log in (use username and password seeded to the database)
 
-##### Landing page
+#### Landing page
 
-##### Navigation bar 
+#### Navigation bar 
 
-##### Tasks
+#### Tasks
 
   * Mark items as returned
   * add (or remove) inventory
