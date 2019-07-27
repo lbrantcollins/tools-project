@@ -1,11 +1,23 @@
 const mongoose = require("mongoose");
 
-const adminSchema = {
-	name: String,
-	email: String,
-	password: String,
-}
+const rentalSchema = mongoose.Schema({
+	startDate: Date,
+	dueData: Date,
+	returnDate: Date,
+	active: Boolean,
+	totalCost: Number,
+	paid: Boolean,
+	AmountDue: Number,
+	user: {
+    type: mongoose.Schema.Types.ObjectId,  // ._id
+    ref: 'User'
+  },
+	admin: {
+    type: mongoose.Schema.Types.ObjectId,  // ._id
+    ref: 'Admin'
+  }
+})
 
-const Admin = new mongoose.Schema("Admin", adminSchema);
+const Rental = new mongoose.model("Rental", rentalSchema);
 
-module.exports = User;
+module.exports = Rental;
