@@ -15,55 +15,55 @@ Tool rental portal.
 
 ##### The user's home page will display
 
-		# Most recent three active user rentals, if any
-			# A link to the list of all active user rentals
-		# Three products available for rent
-			# perhaps chosen from among user's past rented items?
-			# or from among other items in the same category as prior rented items
-			# Include a link to the full catalog
-		# Three most recent prior user rentals, if any
-			# A Link to list of all prior user rentals
+		* Most recent three active user rentals, if any
+			* A link to the list of all active user rentals
+		* Three products available for rent
+			* perhaps chosen from among user's past rented items?
+			* or from among other items in the same category as prior rented items
+			* Include a link to the full catalog
+		* Three most recent prior user rentals, if any
+			* A Link to list of all prior user rentals
 
 ##### Current rentals and rental history pages
 		
-		# from either the landing page or rental list pages (current and prior)
-			# clicking on a product will take user to the rental page
-				# a link to the product page
-				# a link to an account page
+		* from either the landing page or rental list pages (current and prior)
+			* clicking on a product will take user to the rental page
+				* a link to the product page
+				* a link to an account page
 
 ##### Product pages 
 
-	# Full catalog
-		# display all items with small photo, title (and cost?)
-			# multiple pages of items will be available
-		# each item has a link to a more detailed product page
-	#	Clicking on a product will take user to the product information page
+	* Full catalog
+		* display all items with small photo, title (and cost?)
+			* multiple pages of items will be available
+		* each item has a link to a more detailed product page
+	* Clicking on a product will take user to the product information page
 
 ##### Rental page
 
-	# rental start date
-	# due date
-	# returned date
-	# cost (or balance due for prior unpaid or current, but late rentals)
+	* rental start date
+	* due date
+	* returned date
+	* cost (or balance due for prior unpaid or current, but late rentals)
 
 
 ##### Account page
 
-	# total balance due
-	# ????
-	# ????
-	# make a payment
+	* total balance due
+	* ????
+	* ????
+	* make a payment
 
 ##### Site navigation
 
-	# The navigation bar will be available from any page and provide the user with links to
-		# full catalog
-		# rentals
-			# current and prior rentals pages
-			# rental page for each item
-		# ????
-		# ????
-		# User's first name
+	* The navigation bar will be available from any page and provide the user with links to
+		* full catalog
+		* rentals
+			* current and prior rentals pages
+			* rental page for each item
+		* ????
+		* ????
+		* User's first name
 		# Balance due (or credit)
 
 ### Administrator (user)
@@ -76,6 +76,6 @@ Tool rental portal.
 
 ##### Tasks
 
-	# Mark items as returned
-	# add (or remove) inventory
+	* Mark items as returned
+	* add (or remove) inventory
 
