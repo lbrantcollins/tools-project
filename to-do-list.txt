@@ -1,0 +1,20 @@
+CSS
+*************
+navbar (bootstrap)
+page layouts
+
+
+Database
+*************
+seed tools
+seed admin
+seed some users and rentals
+
+Routes
+*************
+
+
+Tools
+
+
+
