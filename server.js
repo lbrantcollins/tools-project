@@ -31,7 +31,6 @@ app.use('/tools', toolsController);
 app.use('/rentals', rentalsController);
 
 
-
 // server listening at PORT number defined above
 app.listen(PORT, () => {
   console.log(`listening... on port ${PORT} at ${Date().toLocaleString}`);
