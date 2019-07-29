@@ -22,12 +22,10 @@ app.use(bodyParser.urlencoded({extended:false}));
 app.use(methodOverride('_method'));
 
 // controllers
-const adminsController = require('./controllers/admins');
 const usersController = require('./controllers/users');
 const toolsController = require('./controllers/tools');
 const rentalsController = require('./controllers/rentals');
 
-app.use('/admins', adminsController);
 app.use('/users', usersController);
 app.use('/tools', toolsController);
 app.use('/rentals', rentalsController);
