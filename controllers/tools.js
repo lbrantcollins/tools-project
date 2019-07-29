@@ -29,24 +29,15 @@ router.get("/", async (req, res, next) => {
 // if any are available, provide a "rent" button
 router.get("/:id", async (req, res, next) => {
 	try {
-		Tool.findById(req.params.id).populate()
+		const foundTool = await Tool.findById(req.params.id);
+		console.log(foundTool);
+		res.render("tools/show.ejs", {
+			tool: toolFound
+		})
 	} catch(err) {
 		next(err)
 	}
-	res.render("items/show.ejs");
 })
 
-router.get('/:id', (req, res) => {
-  console.log(req.params, " params in the show route")
-  Author.findById(req.params.id)
-  .populate('articles')
-  .exec((err, foundAuthor) => {
-    console.log(foundAuthor, ' foundAuthor in authors show page')
-
-    res.render('authors/show.ejs', {
-      author: foundAuthor
-    })
-  })
-});
 
 module.exports = router;
