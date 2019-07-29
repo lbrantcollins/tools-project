@@ -1,24 +1,15 @@
 const express 		= require("express");
 const bcrypt		= require("bcryptjs")
 const router 		= express.Router();
-const Tool			= require("../models/tool");
-const Item 			= require("../models/item");
+const Item			= require("../models/item");
 
 // INDEX route
 // *******************
-// show tools (url/photo and cost)
+// show one tool per item (url/photo and cost)
 // and "more info" button
+
 router.get("/", async (req, res, next) => {
-	try {
-		const foundTools = await Tool.find({})
-		console.log(foundTools);
-		res.render("tools/index.ejs",
-			{
-				tools: foundTools
-			});
-	} catch(err) {
-		next(err)
-	}
+	res.render("items/index.ejs");
 })
 
 // SHOW route
@@ -29,15 +20,11 @@ router.get("/", async (req, res, next) => {
 // if any are available, provide a "rent" button
 router.get("/:id", async (req, res, next) => {
 	try {
-		const foundTool = await Tool.findById(req.params.id);
-		console.log(foundTool);
-		res.render("tools/show.ejs", {
-			tool: toolFound
-		})
+		Item.findOne().populate(tool).exec(err, tool) 
 	} catch(err) {
 		next(err)
 	}
+	res.render("items/show.ejs");
 })
-
 
 module.exports = router;
