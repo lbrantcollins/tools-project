@@ -3,8 +3,8 @@ const mongoose = require('mongoose')
 const toolSchema = new mongoose.Schema({
 	name: String,
 	type: String,
-	rental_cost: Number,
-	late_fee: Number,
+	rentalCost: Number,
+	lateFee: Number,
 	description: String,
 	url: String,
 	rented: Boolean
