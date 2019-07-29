@@ -9,7 +9,7 @@ const Item			= require("../models/item");
 // and "more info" button
 
 router.get("/", async (req, res, next) => {
-	res.render("items/index.ejs")
+	res.render("items/index.ejs");
 })
 
 // SHOW route
@@ -18,6 +18,13 @@ router.get("/", async (req, res, next) => {
 // url/photo, cost, description, late fee
 // count how many items are available for this tool
 // if any are available, provide a "rent" button
-
+router.get("/:id", async (req, res, next) => {
+	try {
+		Item.findOne().populate(tool).exec(err, tool) 
+	} catch(err) {
+		next(err)
+	}
+	res.render("items/show.ejs");
+})
 
 module.exports = router;
