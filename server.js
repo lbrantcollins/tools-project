@@ -23,14 +23,18 @@ app.use(methodOverride('_method'));
 
 // controllers
 const usersController = require('./controllers/users');
+const itemsController = require('./controllers/items');
 const toolsController = require('./controllers/tools');
 const rentalsController = require('./controllers/rentals');
 
 app.use('/users', usersController);
+app.use('/items', itemsController);
 app.use('/tools', toolsController);
 app.use('/rentals', rentalsController);
 
-
+app.get("/", (req, res, next) => {
+	res.render("index.ejs");
+})
 
 // server listening at PORT number defined above
 app.listen(PORT, () => {
