@@ -7,7 +7,6 @@ const toolSchema = new mongoose.Schema({
 	lateFee: Number,
 	description: String,
 	url: String,
-	rented: Boolean
 })
 
 const Tool = mongoose.model('Tool', toolSchema);
