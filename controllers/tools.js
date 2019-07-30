@@ -14,6 +14,17 @@ router.get('/seed', async (req, res, next) => {
 		const insertedTools = await Tool.collection.insertMany(toolData, (err, data) => {
 			console.log("added provided tool data");
 			console.log(data);
+<<<<<<< HEAD
+		})
+		const foundTools = await Tool.find({});
+		console.log(foundTools);
+		for(let i = 0; i < foundTools.length; i++){
+			Item.create({tool: foundTools[i]._id, rented: false});
+			Item.create({tool: foundTools[i]._id, rented: false});
+			Item.create({tool: foundTools[i]._id, rented: false});
+		}
+		res.redirect('/');
+=======
 			Item.create( {
 				tool: insertedTools.id,
 				rented: false
@@ -25,6 +36,7 @@ router.get('/seed', async (req, res, next) => {
 			res.redirect("/");
 	})
 		
+>>>>>>> 50c86908584681abf5c64bd30ddd7e549bd1f128
 	} catch(err){
 		next(err)
 	}

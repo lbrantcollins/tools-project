@@ -2,6 +2,7 @@ const express 		= require("express");
 const bcrypt		= require("bcryptjs")
 const router 		= express.Router();
 const Item			= require("../models/item");
+const Tool = require('../models/tool')
 
 // INDEX route
 // *******************
