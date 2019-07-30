@@ -6,15 +6,13 @@ const Item 			= require("../models/item");
 
 
 // Seeding Tools Collection
-// const toolData = require('../public/js/seed')
+const toolData = require('../public/js/seed')
 
 router.get('/seed', async (req, res, next) => {
 	try {
-		Tool.collection.insertMany(toolData, (err, data) => {
-			console.log("added provided tool data");
-			console.log(data);
-<<<<<<< HEAD
-		})
+		const data = await Tool.collection.insertMany(toolData)
+		console.log("added provided tool data");
+		console.log(data);
 		const foundTools = await Tool.find({});
 		console.log(foundTools);
 		for(let i = 0; i < foundTools.length; i++){
@@ -23,19 +21,7 @@ router.get('/seed', async (req, res, next) => {
 			Item.create({tool: foundTools[i]._id, rented: false});
 		}
 		res.redirect('/');
-=======
-			Item.create( {
-				tool: toolData.id,
-				rented: false
-			})
-			Item.create( {
-				tool: toolData.id,
-				rented: false
-			})
-			res.redirect("/");
-	})
-		
->>>>>>> 50c86908584681abf5c64bd30ddd7e549bd1f128
+
 	} catch(err){
 		next(err)
 	}
