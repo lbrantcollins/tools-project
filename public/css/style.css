@@ -10,10 +10,7 @@ body {
 	color: red;
 }
 
-.main-navigation .menu > li > a {
-    border-right: 1px solid #000000;
-}
-
-.main-navigation .menu > li:last-child > a {
-    border-right: 0;
+.tool-image {
+	width: 200px;
+	height: 200px;
 }

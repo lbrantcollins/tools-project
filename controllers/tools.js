@@ -4,29 +4,27 @@ const router 		= express.Router();
 const Tool			= require("../models/tool");
 const Item 			= require("../models/item");
 
-const toolData		= require("../public/js/seed")
-
 // Seeding Tools Collection
 const toolData = require('../public/js/seed')
 
-router.get('/seed', async (req, res, next) => {
-	try {
-		const data = await Tool.collection.insertMany(toolData)
-		console.log("added provided tool data");
-		console.log(data);
-		const foundTools = await Tool.find({});
-		console.log(foundTools);
-		for(let i = 0; i < foundTools.length; i++){
-			Item.create({tool: foundTools[i]._id, rented: false});
-			Item.create({tool: foundTools[i]._id, rented: false});
-			Item.create({tool: foundTools[i]._id, rented: false});
-		}
-		res.redirect('/');
+// router.get('/seed', async (req, res, next) => {
+// 	try {
+// 		const data = await Tool.collection.insertMany(toolData)
+// 		console.log("added provided tool data");
+// 		console.log(data);
+// 		const foundTools = await Tool.find({});
+// 		console.log(foundTools);
+// 		for(let i = 0; i < foundTools.length; i++){
+// 			Item.create({tool: foundTools[i]._id, rented: false});
+// 			Item.create({tool: foundTools[i]._id, rented: false});
+// 			Item.create({tool: foundTools[i]._id, rented: false});
+// 		}
+// 		res.redirect('/');
 		
-	} catch(err){
-		next(err)
-	}
-});
+// 	} catch(err){
+// 		next(err)
+// 	}
+// });
 
 
 
@@ -60,7 +58,7 @@ router.get("/:id", async (req, res, next) => {
 		const foundTool = await Tool.findById(req.params.id);
 		console.log(foundTool);
 		res.render("tools/show.ejs", {
-			tool: toolFound
+			tool: foundTool
 		})
 	} catch(err) {
 		next(err)
