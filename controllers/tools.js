@@ -6,13 +6,22 @@ const Item 			= require("../models/item");
 
 
 // Seeding Tools Collection
-const toolData = require('../public/js/seed')
+// const toolData = require('../public/js/seed')
 
 router.get('/seed', async (req, res, next) => {
 	try {
 		Tool.collection.insertMany(toolData, (err, data) => {
 			console.log("added provided tool data");
 			console.log(data);
+			Item.create( {
+				tool: toolData.id,
+				rented: false
+			})
+			Item.create( {
+				tool: toolData.id,
+				rented: false
+			})
+			res.redirect("/");
 	})
 		
 	} catch(err){
