@@ -1,13 +1,11 @@
 body {
-	background-color: grey;
+	background-color: lavender;
 }
 
 .message.good {
-	color: lightblue;
-	background-color: lavender;
+	color: blue;
 }
 
 .message.bad {
 	color: red;
-	background-color: pink;
 }

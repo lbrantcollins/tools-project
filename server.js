@@ -26,7 +26,7 @@ app.use(bodyParser.urlencoded({extended:false}));
 app.use(methodOverride('_method'));
 
 // store css and other external files
-app.use(express.static('public'))
+app.use(express.static('public'));
 
 // start a user session
 app.use(session( {
