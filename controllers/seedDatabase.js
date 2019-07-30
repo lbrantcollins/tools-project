@@ -3,7 +3,7 @@ const bcrypt		= require("bcryptjs")
 const router 		= express.Router();
 
 const Tool			= require("../models/tool");
-const toolData 	= require("../data/toolData.js")
+const toolData 	= require("../public/js/seed.js")
 
 app.get('/', (req, res, next) => {
 // seed the tool database
