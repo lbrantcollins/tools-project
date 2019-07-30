@@ -1,8 +1,12 @@
+
+// we will store session secret as an environment variable 
+require('dotenv').config()
+
 // node modules
 const express 			= require('express');
 const bodyParser 		= require('body-parser');
 const methodOverride = require('method-override');
-const fs					= require('fs');
+const session 			= require('express-session');
 
 // use express
 const app = express();
@@ -20,6 +24,38 @@ app.use(bodyParser.urlencoded({extended:false}));
 
 // interpret query strings: ?_method=PUT or ?_method=DELETE
 app.use(methodOverride('_method'));
+
+// store css and other external files
+app.use(express.static('public'));
+
+// start a user session
+app.use(session( {
+	secret: process.env.SESSION_SECRET,
+	resave: false,
+	saveUninitialized: false
+}))
+
+// custom middleware to help with handling user auth messages
+app.use( (req, res, next) => {
+	console.log("custom middleware is running");
+	// vars stored in res.locals are avail in any ejs when rendered
+	res.locals.loggedIn = req.session.loggedIn;
+	res.locals.username = req.session.username;
+	res.locals.name = req.session.name;
+
+	if(req.session.message) {
+		res.locals.message = req.session.message;
+		res.locals.status = req.session.status;
+	} else {
+		res.locals.message = undefined;
+		res.locals.status = undefined;
+	}
+
+	req.session.message = undefined;
+	req.session.status = undefined;
+
+	next();
+})
 
 // controllers
 const usersController = require('./controllers/users');
