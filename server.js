@@ -1,8 +1,8 @@
 // node modules
 const express 			= require('express');
 const bodyParser 		= require('body-parser');
-const methodOverride = require('method-override');
-const fs					= require('fs');
+const methodOverride 	= require('method-override');
+const fs				= require('fs');
 
 // use express
 const app = express();
@@ -14,6 +14,7 @@ const PORT = 3000;
 require('./db/db.js');
 
 // middleware
+app.use(express.static('public'));
 
 // parse req.body
 app.use(bodyParser.urlencoded({extended:false}));
@@ -31,6 +32,12 @@ app.use('/users', usersController);
 app.use('/items', itemsController);
 app.use('/tools', toolsController);
 app.use('/rentals', rentalsController);
+
+
+
+
+
+
 
 app.get("/", (req, res, next) => {
 	res.render("index.ejs");
