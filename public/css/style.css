@@ -1,5 +1,5 @@
 body {
-	background-color: lavender;
+	background-color: white;
 }
 
 .message.good {
@@ -13,4 +13,14 @@ body {
 .tool-image {
 	width: 200px;
 	height: 200px;
+}
+
+#container {
+	display: inline-block;
+}
+
+#container {
+	display: flex;
+	justify-content: space-between;
+	width: 610px;
 }
