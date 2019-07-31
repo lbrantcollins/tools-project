@@ -38,10 +38,15 @@ router.get("/", async (req, res, next) => {
 	try {
 		const toolsFound = await Tool.find({})
 		console.log(toolsFound);
-		res.render("tools/index.ejs",
-			{
-				tools: toolsFound
-			});
+		// can only view catalog if logged in
+		if (req.session.loggedIn) {
+			res.render("tools/index.ejs",
+				{
+					tools: toolsFound
+				});
+		} else {
+			res.redirect("/");
+		}
 	} catch(err) {
 		next(err)
 	}
@@ -57,10 +62,16 @@ router.get("/", async (req, res, next) => {
 router.get("/:id", async (req, res, next) => {
 	try {
 		const toolFound = await Tool.findById(req.params.id);
-		console.log(toolFound);
-		res.render("tools/show.ejs", {
-			tool: toolFound
-		})
+		console.log("tool found in show route ----->", toolFound);
+		// Can only view tool details if logged in
+		if (req.session.loggedIn) {
+			res.render("tools/show.ejs",
+				{
+					tool: toolFound
+				});
+		} else {
+			res.redirect("/");
+		}
 	} catch(err) {
 		next(err)
 	}
@@ -73,7 +84,7 @@ router.get("/:id", async (req, res, next) => {
 router.put("/:id/edit", async (req, res, next) => {
 	try {
 		const toolFound = await Tool.findByIdAndUpdate(req.params.id, req.body);
-		console.log(toolFound);
+		console.log("tool found in admin edit route ----->", toolFound);
 		// Only allow access for ADMIN
 		if (req.session.admin) {
 			res.render("tools/edit.ejs", {
