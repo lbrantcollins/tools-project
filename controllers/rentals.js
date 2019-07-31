@@ -31,9 +31,12 @@ router.post("/", async (req, res, next) => {
 		})
 		console.log("\nuser found in rental create ------->");
 		console.log(userFound);
+		d = new Date();
+		d7 = new Date()
+		d7.setDate(d7.getDate() + 7)
 		const rentalCreated = await Rental.create({
-				startDate: "7/31/2019",
-				dueDate: "8/6/2019",
+				startDate: d,
+				dueDate: d7,
 				returnDate: undefined,
 				active: true,
 				// totalCost: Number,
