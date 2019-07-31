@@ -16,34 +16,38 @@
 </head>
 <body>
 
-	<nav class="navbar navbar-expand-sm navbar-dark bg-dark">
-		<a class="navbar-brand" href="/">bittools</a>
+	<nav class="navbar navbar-expand-sm navbar-light bg-light">
+		<a class="navbar-brand" href="/">
+			<img src="/images/adjustable-wrench.png" width="30" height="30" class="d-inline-block align-top" alt="">
+			bittools
+		</a>
 		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     	<span class="navbar-toggler-icon"></span>
   		</button>
 		<div class="collapse navbar-collapse" id="navbarSupportedContent">
-			<ul class="navbar-nav mr-auto">
+			<div class="navbar-nav mr-auto">
 				<!-- link to items index page -->
-				<li class="nav-item active"><a class="nav-link" href="/tools">Catalog</a></li> 
-				<li class="nav-item dropdown">
-					<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-						Rentals
+				<a class="nav-item active nav-link" href="/tools">Catalog</a> 
+				<div class="nav-item active dropdown">
+					<a class=" nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+					Your Rentals
 					</a>
-        			<div class="dropdown-menu" aria-labelledby="navbarDropdown">
-        				<!-- link to user prior rentals index page /?view=current -->
-						<a class="dropdown-item" href="/rentals/current/<%=username%>">Current Rentals</a>
-						<!-- link to user prior rentals index page /?view=past -->
-						<a class="dropdown-item" href="/rentals/history/<%=username%>">Rental History</a>
-        			</div>
-        		</li> 
-				<li class=nav-item>
-						<a class="nav-link" href="#"><%if (!(name == undefined)) {%> Hi, <%=name%> <%}%></a>
-				</li> <!-- link to account page --> 
-				<li class=nav-item>
-					<a class="nav-link" href="#">Balance</a>
-				</li> <!-- make a payment page -->
-			</ul>
+	        			<div class="dropdown-menu" aria-labelledby="navbarDropdown">
+	        				<!-- link to user prior rentals index page /?view=current -->
+							<a class="dropdown-item" href="/rentals/current/<%=username%>">Current Rentals</a>
+							<!-- link to user prior rentals index page /?view=past -->
+							<a class="dropdown-item" href="/rentals/history/<%=username%>">Rental History</a>
+	        			</div> 
+        		</div>
 		</div>
+        		<div class="nav navbar-nav navbar-right">
+        			<a class="nav-item active nav-link" href=""> <% if (loggedIn) { %> Hi, <%=name%> <% } %> </a>
+					<a class="nav-item active nav-link" href="/users/logout"><% if (loggedIn) { %> [Sign Out] <% } %></a>
+					<a class="nav-item active nav-link" href="/users/login"><% if (!loggedIn) { %> Log In <% } %></a>
+					<a class="nav-item active nav-link" href="/users/register"><% if (!loggedIn) { %>Register  <% } %></a>
+					<a class="nav-item active nav-link" href="#"><% if (loggedIn) { %> Balance <% } %></a>
+				</div>
+			</div>
 	</nav>
 
 	
