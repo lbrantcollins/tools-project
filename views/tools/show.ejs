@@ -15,4 +15,9 @@
 				(Late Fee: <%=tool.lateFee.toLocaleString("en-US", {style: "currency", currency: "USD", minimumFractionDigits: 2})%>/day)</p>
 			</div>
 
+			<form method="POST" action="/rentals">
+				<input type="hidden" name="toolId" value="<%=tool._id%>">
+				<button>Rent</button>
+			</form>
+
 <% include ../partials/footer.ejs %>

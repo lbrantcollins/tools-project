@@ -5,10 +5,8 @@
 <ul>
 	<% for(let i = 0; i < rentals.length; i++){ %>
 		<li><a href="/rentals/<%=rentals._id%>"><%=tool.name%></a> 
-			<% if(rental.rental.active == false){ %>
-			Amount Due: <%=rental.amount_due%>
-			<%} else { %>
-			Rental Due: <%=rental.return_date%>
-			<%}%>
+			Amount Due: <%=rental.amountDue%>
 		</li>
 </ul>
+
+<% include ../partials/footer.ejs %>

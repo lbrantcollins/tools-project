@@ -5,17 +5,17 @@ const rentalSchema = mongoose.Schema({
 	dueDate: Date,
 	returnDate: Date,
 	active: Boolean,
-	totalCost: Number,
+	// totalCost: Number,
 	paid: Boolean,
-	amountDue: Number,
+	amountDue: Number, //tool.rentalCost + calculated lateFee
 	user: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'User'
-  },
-	tool: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'Tool'
-  }
+     type: mongoose.Schema.Types.ObjectId,
+     ref: 'User'
+   },
+   item: {
+     type: mongoose.Schema.Types.ObjectId,
+     ref: 'Item'
+   }
 })
 
 const Rental = new mongoose.model("Rental", rentalSchema);

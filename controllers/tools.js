@@ -5,7 +5,7 @@ const Tool			= require("../models/tool");
 const Item 			= require("../models/item");
 
 // Seeding Tools Collection
-const toolData = require('../public/js/seed')
+// const toolData = require('../public/js/seed')
 
 // router.get('/seed', async (req, res, next) => {
 // 	try {
@@ -37,7 +37,7 @@ const toolData = require('../public/js/seed')
 router.get("/", async (req, res, next) => {
 	try {
 		const toolsFound = await Tool.find({})
-		console.log(toolsFound);
+		// console.log(toolsFound);
 		// can only view catalog if logged in
 		if (req.session.loggedIn) {
 			res.render("tools/index.ejs",
@@ -57,17 +57,31 @@ router.get("/", async (req, res, next) => {
 // (admin ONLY will see an edit button displayed on page)
 // show one tool
 // url/photo, cost, description, late fee
+// *********************************************
+// # 2
+// *********************************************
 // count how many items are available for this tool
 // if any are available, provide a "rent" button
+// *********************************************
+
 router.get("/:id", async (req, res, next) => {
 	try {
 		const toolFound = await Tool.findById(req.params.id);
 		console.log("tool found in show route ----->", toolFound);
+
+		// find all items for this tool
+		// (on show page, count number of items not rented)
+		// (on show page, list num items available)
+		// (on show page, if no items available, 
+		//    then show "out of stock" and disable "rent" button)
+		// (on show page, for ADMINS, show "return", not "rent" button)
+
 		// Can only view tool details if logged in
 		if (req.session.loggedIn) {
 			res.render("tools/show.ejs",
 				{
 					tool: toolFound
+					// send items list also
 				});
 		} else {
 			res.redirect("/");

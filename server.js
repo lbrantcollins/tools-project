@@ -40,10 +40,12 @@ app.use(session( {
 // custom middleware to help with handling user auth messages
 app.use( (req, res, next) => {
 	console.log("custom middleware is running");
+	console.log("req.session ------>\n", req.session);
 	// vars stored in res.locals are avail in any ejs when rendered
 	res.locals.loggedIn = req.session.loggedIn;
 	res.locals.admin = req.session.admin;
 	res.locals.username = req.session.username;
+	res.locals.userId = req.session._id;
 	res.locals.name = req.session.name;
 
 	if(req.session.message) {

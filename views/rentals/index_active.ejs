@@ -1,0 +1,14 @@
+<% include ../partials/header.ejs %>
+
+<h1>Rentals:</h1>
+
+<ul>
+	<% for(let i = 0; i < rentals.length; i++){ %>
+		<li><a href="/rentals/<%=rentals._id%>"><%=rentals.tool.name%></a> 
+		<li>Rental Due: <%=rentals.rentalCost%></li>
+		<li>Late Fee: <%=tool.lateFee%>/day</li>
+		</li>
+	<% } %>
+</ul>
+
+<% include ../partials/footer.ejs %>
