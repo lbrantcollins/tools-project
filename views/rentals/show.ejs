@@ -1,0 +1,13 @@
+<% include ../partials/header.ejs %>
+
+<h1><%=tool.name%> Rental:</h1>
+
+<li>Rental Date: <%=rental.rental_date%></li>
+<li>Rental Due Date: <%=rental.rental_due_date%></li>
+<%if(rental_active == false){ %>
+<li>Return Date: <%=rental.return_date%></li>
+<li>Amount Due: <%=rental.amount_due%></li>
+<%}%>
+<li>Total Cost: <%=rental.total_cost%></li>
+
+
