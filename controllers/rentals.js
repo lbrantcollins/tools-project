@@ -6,11 +6,8 @@ const Tool			= require("../models/tool");
 const Item 			= require("../models/item");
 const User 			= require("../models/user");
 
-// *********************************************
-// # 1
-// *********************************************
 // create route (rent a tool)
-// first available item
+// grab the first available item
 // *********************************************
 router.post("/", async (req, res, next) => {
 	// assumption: template prevents you from even 
@@ -55,23 +52,7 @@ router.post("/", async (req, res, next) => {
 })
 
 
-
-
-// 
-router.get("/", async (req, res, next) => {
-	try {
-		const foundRentals = await Rental.find({})
-		console.log(foundRentals);
-		const item = await Item.findById({})
-		res.render("rentals/index.ejs",
-			{
-				rentals: foundRentals
-			});
-	} catch(err) {
-		next(err)
-	}
-})
-
+// index route: show all of user's active rentals
 router.get("/active", async (req, res, next) => {
 	try {
 		const foundRentals = await Rental.find({
@@ -90,7 +71,7 @@ router.get("/active", async (req, res, next) => {
 	}
 })
 
-// for the user to see past rental
+// index route: show all of user's past/returned rentals
 router.get("/history", async (req, res, next) => {
 	try {
 
@@ -106,7 +87,7 @@ router.get("/history", async (req, res, next) => {
 		// then how to reference tool in index page?
 		console.log(foundRentals);
 
-		res.render("rentals/index.ejs",
+		res.render("rentals/index_history.ejs",
 			{
 				rentals: foundRentals
 			});

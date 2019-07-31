@@ -54,7 +54,8 @@ router.get("/", async (req, res, next) => {
 
 // SHOW route for users AND admin
 // *******************
-// (admin ONLY will see an edit button displayed on page)
+// (ONLY admin will see an edit button displayed on page)
+// (ONLY user will see a "rent" button displayed on page)
 // show one tool
 // url/photo, cost, description, late fee
 // *********************************************
