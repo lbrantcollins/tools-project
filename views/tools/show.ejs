@@ -1,19 +1,18 @@
 <% include ../partials/header.ejs %>
 
-	<h1>Tool Detail</h1>
+	<h1>Tool Details</h1>
 
-
-	<ul>
+			<img class="tool-image" src="<%=tool.url%>" >
 		
-			<li><%=tool.url%></li>
-			<li><%=tool.name%></li>
-			<li><%=tool.description%></li>
-			<li><%=tool.type%></li>
-			<li><%=tool.rentalCost%></li>
-			<li><%=tool.lateFee%></li>
+			<div>
+				<p><%=tool.name%></p>
 
-			
-	</ul>
+				<p>Description: <%=tool.description%></p>
 
-</body>
-</html>
+				<p>Category: <%=tool.type%></p>
+
+				<p>7-Day Rental: <%=tool.rentalCost.toLocaleString("en-US", {style: "currency", currency: "USD", minimumFractionDigits: 2})%>
+				(Late Fee: <%=tool.lateFee.toLocaleString("en-US", {style: "currency", currency: "USD", minimumFractionDigits: 2})%>/day)</p>
+			</div>
+
+<% include ../partials/footer.ejs %>

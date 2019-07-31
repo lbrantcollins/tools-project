@@ -1,5 +1,5 @@
 body {
-	background-color: lavender;
+	background-color: white;
 }
 
 .message.good {
@@ -10,10 +10,17 @@ body {
 	color: red;
 }
 
-.main-navigation .menu > li > a {
-    border-right: 1px solid #000000;
+.tool-image {
+	width: 200px;
+	height: 200px;
 }
 
-.main-navigation .menu > li:last-child > a {
-    border-right: 0;
+#container {
+	display: inline-block;
+}
+
+#container {
+	display: flex;
+	justify-content: space-between;
+	width: 610px;
 }
