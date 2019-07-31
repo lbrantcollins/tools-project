@@ -79,8 +79,15 @@ router.post("/login", async (req, res, next) => {
 				req.session.username = userFound.username;
 				req.session.message = `Logged in as ${userFound.username}`;
 				req.session.status = "good";
-				// redirect home
-				res.redirect("/");
+				// redirect admin to edit homepage 
+				// redirect all other users to main home page
+				if (req.body.username === "admin") {
+					req.session.admin = true;
+					res.redirect("/edit");
+				} else {
+					req.session.admin = false;
+					res.redirect("/");
+				}
 			} else {
 				// bad password
 				console.log("bad password");
