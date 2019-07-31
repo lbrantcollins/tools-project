@@ -5,8 +5,8 @@
 
 	<ul>
 		<% for (let i = 0; i < tools.length; i++) {%>
-			<li><%=tools[i].url%></li>
-			<li><%=tools[i].rentalCost%></li>
+			<img class="tool-image" src="<%=tools.url%>" >
+			Rental Fee: <%=tools[i].rentalCost.toLocaleString("en-US", {style: "currency", currency: "USD", minimumFractionDigits: 2}) %></li>
 			<a href="/tools/<%=tools[i]._id%>">More info...</a>
 		<%}%>
 	</ul>

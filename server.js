@@ -42,6 +42,7 @@ app.use( (req, res, next) => {
 	console.log("custom middleware is running");
 	// vars stored in res.locals are avail in any ejs when rendered
 	res.locals.loggedIn = req.session.loggedIn;
+	res.locals.admin = req.session.admin;
 	res.locals.username = req.session.username;
 	res.locals.name = req.session.name;
 
