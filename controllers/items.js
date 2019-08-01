@@ -1,8 +1,9 @@
 const express 		= require("express");
-const bcrypt		= require("bcryptjs")
 const router 		= express.Router();
+const User			= require("../models/user");
+const Tool			= require("../models/tool");
 const Item			= require("../models/item");
-const Tool = require('../models/tool')
+const Rental		= require("../models/rental");
 
 // INDEX route
 // *******************

@@ -83,7 +83,7 @@ router.post("/login", async (req, res, next) => {
 				// redirect all other users to main home page
 				if (req.body.username === "admin") {
 					req.session.admin = true;
-					res.redirect("/edit");
+					res.redirect("/admins");
 				} else {
 					req.session.admin = false;
 					res.redirect("/");

@@ -1,0 +1,14 @@
+<% include ../partials/header.ejs %>
+
+<h1>Active Rentals</h1>
+
+<ul>
+	<% for(let i = 0; i < rentals. length; i++){ %>
+		<li>Rental Start Date: <%=rentals[i].startDate%></li>
+		<li>Rental Due Date: <%=rentals[i].dueDate%></li>
+		<li>Base Rental Cost: <%=rentals[i].amountDue%></li>
+		<li>Late Fee: <%=rentals[i].lateFee%></li>
+	<% } %>
+</ul>
+
+<% include ../partials/footer.ejs %>

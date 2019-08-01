@@ -62,15 +62,19 @@ app.use( (req, res, next) => {
 })
 
 // controllers
+const adminsController = require('./controllers/admins');
 const usersController = require('./controllers/users');
 const itemsController = require('./controllers/items');
 const toolsController = require('./controllers/tools');
 const rentalsController = require('./controllers/rentals');
 
+
+app.use('/admins', adminsController);
 app.use('/users', usersController);
 app.use('/items', itemsController);
 app.use('/tools', toolsController);
 app.use('/rentals', rentalsController);
+
 
 
 

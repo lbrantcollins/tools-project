@@ -1,10 +1,9 @@
 const express 		= require("express");
-const bcrypt		= require("bcryptjs")
 const router 		= express.Router();
-const Rental		= require("../models/rental");
+const User			= require("../models/user");
 const Tool			= require("../models/tool");
-const Item 			= require("../models/item");
-const User 			= require("../models/user");
+const Item			= require("../models/item");
+const Rental		= require("../models/rental");
 
 // create route (rent a tool)
 // grab the first available item
