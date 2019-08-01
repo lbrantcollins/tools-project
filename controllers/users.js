@@ -62,7 +62,7 @@ router.post("/login", async (req, res, next) => {
 		const userFound = await User.findOne({
 			username: req.body.username
 		});
-		console.log("user found ----------\n", userFound);
+		// console.log("user found ----------\n", userFound);
 
 		// if username does not match an existing username...
 		if (!userFound) {

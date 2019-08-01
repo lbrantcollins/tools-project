@@ -21,7 +21,7 @@ router.post("/", async (req, res, next) => {
 		})
 		// mark this item as rented
 		availableItemsFound[0].rented = true;
-		availableItemsFound[0].save();
+		await availableItemsFound[0].save();
 
 		// gather information about this tool
 		const toolFound = await Tool.findOne( {
@@ -35,22 +35,24 @@ router.post("/", async (req, res, next) => {
 
 		// rental date is, well... now!
 		const d = new Date();
-		const dDate = (d.getMonth() + 1) + "/" + d.getDate() + "/" + d.getFullYear()
+		console.log("start date: ", d);
+		// const dDate = (d.getMonth() + 1) + "/" + d.getDate() + "/" + d.getFullYear()
 
 		// rental due date is 7 days from now
 		const d7 = new Date();
 		d7.setDate(d7.getDate() + 7);
-		d7Date = (d7.getMonth() + 1) + "/" + d7.getDate() + "/" + d7.getFullYear()
+		console.log("due date: ", d7);
+		// d7Date = (d7.getMonth() + 1) + "/" + d7.getDate() + "/" + d7.getFullYear()
 
 		// create a rental record for this item
 		const rentalCreated = await Rental.create({
-				startDate: dDate,
-				dueDate: d7Date,
+				startDate: d,
+				dueDate: d7,
 				returnDate: undefined,
 				active: true,
 				// totalCost: Number,
 				paid: false,
-				amountDue: toolFound.rentalCost, 
+				amountDue: 0, // don't charge the user until item returned
 				user: userFound,
 			   item: availableItemsFound[0]
 			});
@@ -65,15 +67,19 @@ router.post("/", async (req, res, next) => {
 
 
 // index route: show all of user's active rentals
-router.get("/active", async (req, res, next) => {
+router.get("/active/", async (req, res, next) => {
 	try {
 		const foundRentals = await Rental.find({
 			active: true
+		}).populate({
+			path: 'user', 
+			match: { name: req.session.name }
+		}).populate({
+			path: 'item', 
+			populate: { path: 'tool' }
 		})
-		//.populate(Item.populate(Tool)) subpopulate
-		// https://mongoosejs.com/docs/populate.html
-		// limit list of found rentals to those by this user
-		console.log(foundRentals);
+		console.log("\nactive rentals index route:\n", foundRentals);
+		console.dir(foundRentals[0].item);
 		res.render("rentals/index_active.ejs",
 			{
 				rentals: foundRentals

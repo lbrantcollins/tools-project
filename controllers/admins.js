@@ -9,10 +9,7 @@ const Rental		= require("../models/rental");
 router.get("/", (req, res, next) => {
 	console.log("in res render admin home page");
 	if (req.session.admin === true) {
-			res.render("admins/home.ejs",
-				{
-					rentals: rentalsFound
-				});
+			res.render("admins/home.ejs");
 		} else {
 			res.redirect("/tools");
 		}
@@ -65,18 +62,41 @@ router.get("/rentals", async (req, res, next) => {
 	}
 })
 
-router.post("/rentals", async (req, res, next) => {
+// update a rental to mark as returned
+router.put("/rentals", async (req, res, next) => {
 	try {
-		
-		res.redirect("/rentals")
+		// locate the item being returned
+		// populate the user info via the user id ref in rental
+		// sub-populate the tool info via the item id ref in rental
+		const rentalFound = await Rental.findOne({
+			_id: req.body.rentalId
+		}).populate('user').populate({
+			path: 'item', 
+			populate: {path: 'tool'}
+		})
+
+		// mark the item as returned (not yet paid)
+		rentalFound.active = false;
+		// we still keep the rental entry in the db 
+		// so that users can always see their history of rentals 
+		// (and amt due, if any)
+
+		// *******************************************************
+		// ******** NEED TO CALCULATE LATE FEE USING DATES *******
+		// lateFee = (# days late) * rentalFound.tool.lateFee
+		lateFee = 0;
+		// *******************************************************
+		rentalFound.amountDue = rentalFound.tool.rentalCost + lateFee;
+
+		await rentalFound.save();
+
+		res.redirect("/admins")
+		// res.redirect("/");
 	} catch(err) {
 		next(err);
 	}
 })
 
-// populate each rental with item "rented" field
-// subpopulate each rental with tool fields
-// (show page limits display to rented items)
 
 
 

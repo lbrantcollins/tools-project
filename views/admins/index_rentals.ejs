@@ -4,11 +4,28 @@
 
 <ul>
 	<% for(let i = 0; i < rentals.length; i++) { %>
-		<li>Rental Start Date: <%=rentals[i].startDate%></li>
-		<li>Rental Due Date: <%=rentals[i].dueDate%></li>
+		<li>Rental Start Date: 
+			<%=
+				(rentals[i].startDate.getMonth() + 1) + "/" 
+				+ rentals[i].startDate.getDate() + "/" 
+				+ rentals[i].startDate.getFullYear()
+			%>		
+		</li>
+		<li>Rental Due Date: 
+			<%=
+				(rentals[i].dueDate.getMonth() + 1) + "/" 
+				+ rentals[i].dueDate.getDate() + "/" 
+				+ rentals[i].dueDate.getFullYear()
+			%>						
+		</li>
 		<li>AmountDue: <%=rentals[i].amountDue.toLocaleString("en-US", {style: "currency", currency: "USD", minimumFractionDigits: 2})%></li>
 		<li>User: <%=rentals[i].user.name%></li>
 		<li>Item: <%=rentals[i].item.tool.name%></li>
+
+		<form method="POST" action="/admins/rentals/?_method=PUT">
+			<input type="hidden" name="rentalId" value="<%=rentals[i]._id%>">
+			<button class="btn btn-dark">Return To Inventory</button> 	
+		</form>
 
 
 	<% } %>

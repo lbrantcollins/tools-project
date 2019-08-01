@@ -1,9 +1,9 @@
 const mongoose = require("mongoose");
 
 const rentalSchema = mongoose.Schema({
-	startDate: String,
-	dueDate: String,
-	returnDate: String,
+	startDate: Date,
+	dueDate: Date,
+	returnDate: Date,
 	active: Boolean,
 	// totalCost: Number,
 	paid: Boolean,
