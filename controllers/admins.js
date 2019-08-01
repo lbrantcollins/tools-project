@@ -8,7 +8,14 @@ const Rental		= require("../models/rental");
 
 router.get("/", (req, res, next) => {
 	console.log("in res render admin home page");
-	res.render("./admins/home.ejs")
+	if (req.session.admin === true) {
+			res.render("admins/home.ejs",
+				{
+					rentals: rentalsFound
+				});
+		} else {
+			res.redirect("/tools");
+		}
 })
 
 // *********************************************
@@ -45,19 +52,27 @@ router.get("/rentals", async (req, res, next) => {
 		// console.dir(rentalsFound);
 
 		// can only view rentals list if logged in as ADMIN
-		if (req.session.admin) {
+		if (req.session.admin === true) {
 			res.render("admins/index_rentals.ejs",
 				{
 					rentals: rentalsFound
 				});
 		} else {
-			res.redirect("/");
+			res.redirect("/tools");
 		}
 	} catch(err) {
 		next(err)
 	}
 })
 
+router.post("/rentals", async (req, res, next) => {
+	try {
+		
+		res.redirect("/rentals")
+	} catch(err) {
+		next(err);
+	}
+})
 
 // populate each rental with item "rented" field
 // subpopulate each rental with tool fields
