@@ -13,7 +13,8 @@ const fs				= require('fs');
 const app = express();
 
 // server will listen on this port
-const PORT = 3000;
+
+const PORT = process.env.PORT || 3000;
 
 // database connection
 require('./db/db.js');
