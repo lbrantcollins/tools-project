@@ -4,7 +4,8 @@ const router 		= express.Router();
 const Tool			= require("../models/tool");
 const Item 			= require("../models/item");
 
-// Seeding Tools Collection
+// Seeding Tools Collection and a few items
+// *****************************************************
 // const toolData = require('../public/js/seed')
 
 // router.get('/seed', async (req, res, next) => {
@@ -26,12 +27,8 @@ const Item 			= require("../models/item");
 // 	}
 // });
 
-
-
-
-
 // INDEX route for users AND admin
-// *******************
+// *****************************************************
 // show tools (url/photo and cost)
 // and "more info" button
 router.get("/", async (req, res, next) => {
@@ -67,22 +64,36 @@ router.get("/", async (req, res, next) => {
 
 router.get("/:id", async (req, res, next) => {
 	try {
+		// find the tool info for user-selected tool (a hammer)
 		const toolFound = await Tool.findById(req.params.id);
-		console.log("tool found in show route ----->", toolFound);
+		console.log("\n---------------------------");
+		console.log("\ntool found in show route");
+		console.log(toolFound);
 
-		// find all items for this tool
-		// (on show page, count number of items not rented)
-		// (on show page, list num items available)
-		// (on show page, if no items available, 
-		//    then show "out of stock" and disable "rent" button)
-		// (on show page, for ADMINS, show "return", not "rent" button)
+		// find all items for this tool (all the hammers)
+		const itemsFound = await Item.find({
+			tool: req.params.id
+		})
+		console.log("\n---------------------------");
+		console.log("\nitems found for specifc tool in tool show route");
+		console.log(itemsFound);
 
-		// Can only view tool details if logged in
+		// count how many items are available (how many hammers)
+		const itemsAvailable = itemsFound.reduce( 
+			(accumulator, element) => {
+				return accumulator + (element.rented === false);
+			}, 0);
+		console.log("\n Number of items available:", itemsAvailable);
+		
+		// On show page: display number of items available
+		// If no items avail, show "out of stock", disable "rent" button
+
+		// Users can only view tool details if logged in
 		if (req.session.loggedIn) {
 			res.render("tools/show.ejs",
 				{
-					tool: toolFound
-					// send items list also
+					tool: toolFound,
+					itemsAvailable: itemsAvailable
 				});
 		} else {
 			res.redirect("/");

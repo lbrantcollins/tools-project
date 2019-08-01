@@ -24,3 +24,7 @@ body {
 	justify-content: space-between;
 	width: 610px;
 }
+
+#out-of-stock {
+	color: red;
+}

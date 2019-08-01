@@ -14,23 +14,32 @@ router.post("/", async (req, res, next) => {
 	// getting here if no items available for this tool
 	console.log("req.body in rental create ------->\n", req.body);
 	try {
-
+		// find the first available item
 		const availableItemsFound = await Item.find({
 			tool: req.body.toolId,
 			rented: false
 		})
+		// mark this item as rented
+		availableItemsFound[0].rented = true;
+		availableItemsFound[0].save();
+
 		console.log("items found in rental create ------->\n", availableItemsFound);
 		console.log("\nreq.session:");
 		console.log(req.session);
+
 		// find the id of the current user
 		const userFound = await User.findOne({
 			username: req.session.username
 		})
+
 		console.log("\nuser found in rental create ------->");
 		console.log(userFound);
+		// rental date is now
 		d = new Date();
-		d7 = new Date()
-		d7.setDate(d7.getDate() + 7)
+		// rental due date is 7 days from now
+		d7 = new Date();
+		d7.setDate(d7.getDate() + 7);
+		// create a rental record for this item
 		const rentalCreated = await Rental.create({
 				startDate: d,
 				dueDate: d7,
