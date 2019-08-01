@@ -23,26 +23,34 @@ router.post("/", async (req, res, next) => {
 		availableItemsFound[0].rented = true;
 		availableItemsFound[0].save();
 
+		// gather information about this tool
+		const toolFound = await Tool.findOne( {
+			_id: req.body.toolId
+		})
+
 		// find the id of the current user
 		const userFound = await User.findOne({
 			username: req.session.username
 		})
 
 		// rental date is, well... now!
-		d = new Date();
+		const d = new Date();
+		const dDate = (d.getMonth() + 1) + "/" + d.getDate() + "/" + d.getFullYear()
+
 		// rental due date is 7 days from now
-		d7 = new Date();
+		const d7 = new Date();
 		d7.setDate(d7.getDate() + 7);
+		d7Date = (d7.getMonth() + 1) + "/" + d7.getDate() + "/" + d7.getFullYear()
 
 		// create a rental record for this item
 		const rentalCreated = await Rental.create({
-				startDate: d,
-				dueDate: d7,
+				startDate: dDate,
+				dueDate: d7Date,
 				returnDate: undefined,
 				active: true,
 				// totalCost: Number,
 				paid: false,
-				amountDue: undefined, 
+				amountDue: toolFound.rentalCost, 
 				user: userFound,
 			   item: availableItemsFound[0]
 			});
@@ -102,19 +110,19 @@ router.get("/history", async (req, res, next) => {
 
 router.get("/:id", async (req, res, next) => {
 	try {
-		const foundRental = await Rental.findById({_id: req.params.body})
-		//.populate(item)...;
-		console.log(foundRental);
-		const foundItem = await Item.findById({_id: foundRental.item})
-		// find tool as well?
+
+		const foundRental = await Rental.findById({_id: req.params.id}).populate({
+			path: 'item', 
+			populate: {path: 'tool'}
+		})
 		// calculate late fee, if any
 	   
 		res.render("rentals/show.ejs",
 			{
 				rental: foundRental,
-				item: foundItem,
-				tool: foundTool,
-				lateFee: lateFee
+				// item: foundItem,
+				// tool: foundTool,
+				// lateFee: lateFee
 			});
 	} catch(err) {
 		next(err)

@@ -20,7 +20,9 @@ router.get("/", (req, res, next) => {
 // result is a return for each item selected
 // 		set rental.active = false
 // result is a calculated amount due (cost + late fee)
-// 		set rental.cost = tool.cost + (days late) * tools.lateFee
+// 		calc: rental.amountDue 
+//				= tool.rentalCost + (days late) * tool.lateFee
+//			add this amount to user.balance
 // *********************************************
 
 // *** PSEUDOCODE ***
@@ -30,16 +32,21 @@ router.get("/", (req, res, next) => {
 // find all rentals
 router.get("/rentals", async (req, res, next) => {
 	try {
+		// find all rentals and for each rental
+		// populate the user info via the user id ref in rental
+		// sub-populate the tool info via the item id ref in rental
 		const rentalsFound = await Rental.find({
 			active: true
+		}).populate('user').populate({
+			path: 'item', 
+			populate: {path: 'tool'}
 		})
-		console.log("\nrentals found for admin show route");
-		console.log("\--------------------------");
-		console.log(rentalsFound);
+
+		// console.dir(rentalsFound);
 
 		// can only view rentals list if logged in as ADMIN
 		if (req.session.admin) {
-			res.render("./admins/index_rentals.ejs",
+			res.render("admins/index_rentals.ejs",
 				{
 					rentals: rentalsFound
 				});

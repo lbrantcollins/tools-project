@@ -32,13 +32,14 @@ router.post("/register", async (req, res, next) => {
 	      // redirect back to registration page
 	      res.redirect("/users/register");
       } else {
-			// register
+			// register new user
 			console.log("I'm creating a user");
 			const pw = bcrypt.hashSync(req.body.password, bcrypt.genSaltSync(10));
 			const createdUser = await User.create( {
 				name: req.body.name,
 				username: req.body.username,
-				password: pw
+				password: pw,
+				balance: 0
 			})
 			// set user to be logged in
 			req.session.loggedIn = true;

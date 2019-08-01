@@ -11,7 +11,6 @@ const userSchema = mongoose.Schema({
 		required: true
 	},
 	balance: Number,
-	admin: Boolean
 })
 
 const User = new mongoose.model("User", userSchema);

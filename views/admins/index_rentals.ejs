@@ -3,11 +3,14 @@
 <h1>Active Rentals</h1>
 
 <ul>
-	<% for(let i = 0; i < rentals. length; i++){ %>
+	<% for(let i = 0; i < rentals.length; i++) { %>
 		<li>Rental Start Date: <%=rentals[i].startDate%></li>
 		<li>Rental Due Date: <%=rentals[i].dueDate%></li>
-		<li>Base Rental Cost: <%=rentals[i].amountDue%></li>
-		<li>Late Fee: <%=rentals[i].lateFee%></li>
+		<li>AmountDue: <%=rentals[i].amountDue.toLocaleString("en-US", {style: "currency", currency: "USD", minimumFractionDigits: 2})%></li>
+		<li>User: <%=rentals[i].user.name%></li>
+		<li>Item: <%=rentals[i].item.tool.name%></li>
+
+
 	<% } %>
 </ul>
 
