@@ -12,7 +12,8 @@ const User 			= require("../models/user");
 router.post("/", async (req, res, next) => {
 	// assumption: template prevents you from even 
 	// getting here if no items available for this tool
-	console.log("req.body in rental create ------->\n", req.body);
+	// so, "availableItemsFound" is never an empty array
+
 	try {
 		// find the first available item
 		const availableItemsFound = await Item.find({
@@ -23,22 +24,17 @@ router.post("/", async (req, res, next) => {
 		availableItemsFound[0].rented = true;
 		availableItemsFound[0].save();
 
-		console.log("items found in rental create ------->\n", availableItemsFound);
-		console.log("\nreq.session:");
-		console.log(req.session);
-
 		// find the id of the current user
 		const userFound = await User.findOne({
 			username: req.session.username
 		})
 
-		console.log("\nuser found in rental create ------->");
-		console.log(userFound);
-		// rental date is now
+		// rental date is, well... now!
 		d = new Date();
 		// rental due date is 7 days from now
 		d7 = new Date();
 		d7.setDate(d7.getDate() + 7);
+
 		// create a rental record for this item
 		const rentalCreated = await Rental.create({
 				startDate: d,
