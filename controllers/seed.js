@@ -1,13 +1,14 @@
 const express 		= require("express");
 const router 		= express.Router();
 
+const Item			= require("../models/item");
 const Tool			= require("../models/tool");
 const toolData 	= require("../public/js/seed")
 
 // Seeding Tools Collection and a few items
 // *****************************************************
 
-router.get('/seed', async (req, res, next) => {
+router.get('/', async (req, res, next) => {
 	try {
 		const data = await Tool.collection.insertMany(toolData)
 		console.log("added provided tool data");
