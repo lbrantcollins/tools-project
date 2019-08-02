@@ -63,6 +63,7 @@ router.get("/rentals", async (req, res, next) => {
 })
 
 // update a rental to mark as returned
+// (and mark the item as available)
 router.put("/rentals", async (req, res, next) => {
 	try {
 		// locate the item being returned
@@ -86,12 +87,22 @@ router.put("/rentals", async (req, res, next) => {
 		// lateFee = (# days late) * rentalFound.tool.lateFee
 		lateFee = 0;
 		// *******************************************************
-		rentalFound.amountDue = rentalFound.tool.rentalCost + lateFee;
+		rentalFound.amountDue = rentalFound.item.tool.rentalCost + lateFee
 
+		rentalFound.returnDate = new Date();
+
+		// save the rental information
 		await rentalFound.save();
 
-		res.redirect("/admins")
-		// res.redirect("/");
+		// mark the item as available
+		const itemFound = await Item.findOne({
+			_id: rentalFound.item
+		})
+		itemFound.rented = false;
+		// save the item information
+		await itemFound.save();
+
+		res.redirect("/admins/rentals");
 	} catch(err) {
 		next(err);
 	}

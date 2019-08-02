@@ -17,7 +17,7 @@ router.get('/', async (req, res, next) => {
 		console.log(foundTools);
 		for(let i = 0; i < foundTools.length; i++){
 			Item.create({tool: foundTools[i]._id, rented: false});
-			Item.create({tool: foundTools[i]._id, rented: true});
+			Item.create({tool: foundTools[i]._id, rented: false});
 			Item.create({tool: foundTools[i]._id, rented: false});
 		}
 		res.redirect('/');

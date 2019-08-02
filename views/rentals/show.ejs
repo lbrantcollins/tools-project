@@ -1,13 +1,34 @@
 <% include ../partials/header.ejs %>
 
-// <h1><%=tool.name%> Rental:</h1>
-
-<li>Rental Date: <%=rental.startDate%></li>
-<li>Rental Due Date: <%=rental.dueDate%></li>
-<%if(rental_active == false){ %>
-<li>Return Date: <%=rental.returnedDate%></li>
-<li>Amount Due: <%=rental.amountDue%></li>
-<%}%>
-<!-- <li>Total Cost: <%=rental.total_cost%></li> -->
+<section id="gallery">
+   <div class="container">
+   	<div class="row">
+         <div class="col-lg-6 mb-6">
+            <div class="card login-card">
+            	<div>
+               <img class="card-img-top tool-image-show" src="<%=rental.item.tool.url%>" alt="bittools logo">
+               <div class="card-body">
+                  <h3 class="card-title"><%=rental.item.tool.name%></h3>
+                  <% let d = rental.startDate %>
+               	<p class="card-text"><span class="label-emphasis">Rental Date:</span> 
+               		<%= (d.getMonth() + 1) + "/" + d.getDate() + "/" + d.getFullYear() %></p>
+               	<% d = rental.dueDate %>
+               	<p class="card-text"><span class="label-emphasis">Rental Due Date:</span> 
+               		<%= (d.getMonth() + 1) + "/" + d.getDate() + "/" + d.getFullYear() %></p>
+               	<p class="card-text"><span class="label-emphasis">Rental Fee:</span> <%=rental.rentalCost.toLocaleString("en-US", {style: "currency", currency: "USD", minimumFractionDigits: 2})%></p>
+               	<p class="card-text"><span class="label-emphasis">Late Fee:</span> <%=rental.lateFee.toLocaleString("en-US", {style: "currency", currency: "USD", minimumFractionDigits: 2})%>/day</p>
+               	<% if (rental.active === false) { %>
+               		<% d = rental.returnDate %>
+               		<p class="card-text"><span class="label-emphasis">Return Date:</span> 
+               			<%= (d.getMonth() + 1) + "/" + d.getDate() + "/" + d.getFullYear() %> </p>
+               		<p class="card-text"><span class="label-emphasis">Amount Due:</span> <%=rental.amountDue.toLocaleString("en-US", {style: "currency", currency: "USD", minimumFractionDigits: 2})%>/day</p>
+               	<%}%>
+               </div>
+            </div>
+         </div>
+      </div>
+   </div>
+</section>
+	
 
 <% include ../partials/footer.ejs %>

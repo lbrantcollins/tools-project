@@ -1,12 +1,42 @@
 <% include ../partials/header.ejs %>
 
-	<h1>Register Here</h1>
+<section id="gallery">
+   <div class="container">
+   	<div class="row">
+         <div class="col-lg-4 mb-4">
+            <div class="card login-card">
+            	<div>
+               <img class="card-img-top login-logo" src="/images/adjustable-wrench.png" alt="bittools logo">
+               <div class="card-body">
+                  <h1 class="card-title">Register Here</h1>
+               	<form action="/users/register" method="POST">
+               		<div class="form-group">
+								<label for="nameField">Name</label>
+								<input type="text" class="form-control" id="nameField" name="name" placeholder="Enter your name">
+							</div>
+							<div class="form-group">
+								<label for="usernameField">Username</label>
+								<input type="text" class="form-control" id="usernameField" name="username" placeholder="Enter username">
+							</div>
+							<div class="form-group">
+							 	<label for="passwordField">Password</label>
+							 	<input type="password" class="form-control" id="passwordField" name="password" placeholder="Password">
+							</div>
+								<button type="submit" class="btn btn-dark">Submit</button>
+						</form>
+               </div>
+            </div>
+         </div>
+      </div>
+   </div>
+</section>
 
-	<form action="/users/register" method="POST" id="register-form">
+
+<!-- 	<form action="/users/register" method="POST" id="register-form">
 		<input type="text" name="name", placeholder="Your name"><br />
 		<input type="text" name="username" placeholder="username"><br />
 		<input type="password" name="password" placeholder="password"><br />
 		<button>Sign up!</button><br />
-	</form>
+	</form> -->
 
 <% include ../partials/footer.ejs %>

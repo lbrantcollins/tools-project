@@ -10,9 +10,18 @@ body {
 	color: red;
 }
 
-.tool-image {
+/*.tool-image-div {
+	max-height: 200px;
+}*/
+
+.tool-image-index {
 	width: 200px;
 	height: 200px;
+}
+
+.tool-image-show {
+	width: 300px;
+	height: 300px;
 }
 
 #container {
@@ -27,4 +36,17 @@ body {
 
 #out-of-stock {
 	color: red;
+}
+
+#home-header {
+	margin-left: 100px;
+}
+
+.login-logo {
+	width: 80px;
+	height: 100px;
+}
+
+.label-emphasis {
+	font-weight: bold;
 }

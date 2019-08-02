@@ -48,7 +48,7 @@ router.post("/", async (req, res, next) => {
 		const rentalCreated = await Rental.create({
 				startDate: d,
 				dueDate: d7,
-				returnDate: undefined,
+				returnDate: null,
 				active: true,
 				// totalCost: Number,
 				paid: false,
@@ -56,10 +56,10 @@ router.post("/", async (req, res, next) => {
 				user: userFound,
 			   item: availableItemsFound[0]
 			});
-		// res.redirect("/rentals/active");
-		console.log("\n-------- rental created!\n");
-		console.log(rentalCreated);
-		res.send('check terminal')
+		res.redirect("/tools");
+		// console.log("\n-------- rental created!\n");
+		// console.log(rentalCreated);
+		// res.send('check terminal')
 	} catch(err) {
 		next(err);
 	}
@@ -67,23 +67,44 @@ router.post("/", async (req, res, next) => {
 
 
 // index route: show all of user's active rentals
-router.get("/active/", async (req, res, next) => {
+router.get("/active", async (req, res, next) => {
 	try {
+		// find all active rentals for the current user
+		// populate the user according to their (unique) username
+		// population the tool info through the item id ref
 		const foundRentals = await Rental.find({
 			active: true
-		}).populate({
-			path: 'user', 
-			match: { name: req.session.name }
-		}).populate({
-			path: 'item', 
-			populate: { path: 'tool' }
+		}).populate('user')
+			.populate({
+				path: 'item', 
+				populate: { path: 'tool' }
 		})
-		console.log("\nactive rentals index route:\n", foundRentals);
-		console.dir(foundRentals[0].item);
+
+		// Rental.find({ active: true })
+		// 	.populate({
+		// 		path: 'user', 
+		// 		match: { username: req.session.username } })
+		// 	.populate({
+		// 		path: 'item', 
+		// 		populate: { path: 'tool' }
+		// }).exec( (err, rentals) => {
+		// 	rentals = rentals.filter( function(rental) {
+		// 		return rental;
+		// 	})
+			
+		// })
+
+
+		console.log("\ndb username:", foundRentals[0]);
+		console.log("\nsession username:", req.session.username);
+
+		// console.log("\nactive rentals index route:\n", foundRentals);
+		// console.dir(foundRentals[0].item);
+		// console.dir(foundRentals[0].item.tool);
 		res.render("rentals/index_active.ejs",
 			{
 				rentals: foundRentals
-			});
+		});
 	} catch(err) {
 		next(err)
 	}
@@ -92,19 +113,20 @@ router.get("/active/", async (req, res, next) => {
 // index route: show all of user's past/returned rentals
 router.get("/history", async (req, res, next) => {
 	try {
-
+		// find all active rentals for the current user
+		// populate the user according to their (unique) username
+		// population the tool info through the item id ref
 		const foundRentals = await Rental.find({
 			active: false
-			// add user id from session here
-		})
-		//.populate(Item.populate(Tool)) subpopulate
-		// limit list of found rentals to those by this user
+		}).populate({
+			path: 'user', 
+			match: { username: req.session.username }
+		}).populate({
+			path: 'item', 
+			populate: { path: 'tool' }
+		})		
 
-		// can we also send tool info with rental here?
-		// would need to populate tool id as well
-		// then how to reference tool in index page?
-		console.log(foundRentals);
-
+		// show the the history (all past rentals)
 		res.render("rentals/index_history.ejs",
 			{
 				rentals: foundRentals

@@ -43,8 +43,10 @@ router.post("/register", async (req, res, next) => {
 			})
 			// set user to be logged in
 			req.session.loggedIn = true;
+			req.session.name = createdUser.name;
 			req.session.username = createdUser.username;
-			req.session.message = "Hello, " + createdUser.name + ".  You are signed in as \"" + createdUser.username + "\"";
+			// req.session.message = "Hello, " + createdUser.name + ".  You are signed in as \"" + createdUser.username + "\"";
+			req.session.messag = "";
 			req.session.status = "good";
 
 			// successful registration: redirect to home page

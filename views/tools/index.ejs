@@ -7,7 +7,9 @@
                <% for(let i = 0; i < tools.length; i++) { %>
                   <div class="col-lg-4 mb-4">
                      <div class="card">
-                        <img class="tool-image card-img-top" src="<%=tools[i].url%>" alt="<%=tools[i].name%>">
+                        <div class="tool-image-div">
+                           <img class="tool-image-index card-img-top" src="<%=tools[i].url%>" alt="<%=tools[i].name%>">
+                        </div>
                         <div class="card-body">
                            <h5 class="card-title"><%=tools[i].name%></h5>
                            <p class="card-text">Rental Fee: <%=tools[i].rentalCost.toLocaleString("en-US", {style: "currency", currency: "USD", minimumFractionDigits: 2})%></p>
