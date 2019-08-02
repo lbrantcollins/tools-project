@@ -80,7 +80,8 @@ router.post("/login", async (req, res, next) => {
 				req.session.loggedIn = true;
 				req.session.name = userFound.name;
 				req.session.username = userFound.username;
-				req.session.message = `Logged in as ${userFound.username}`;
+				// req.session.message = `Logged in as ${userFound.username}`;
+				req.session.message = "";
 				req.session.status = "good";
 				// redirect admin to edit homepage 
 				// redirect all other users to main home page

@@ -82,14 +82,25 @@ router.get("/:id", async (req, res, next) => {
 	}
 })
 
+// CREATE route (FOR ADMIN ONLY)
+// *******************************
+// show new page with form for adding a tool
+router.get("/new", (req, res, next) => {
+	// Only allow access for ADMIN
+	if (req.session.admin) {
+		res.render("tools/new.ejs")
+	} else {
+		res.redirect("/");
+	}
+})
 
 // EDIT route (FOR ADMIN ONLY)
 // *****************************
 // change properties of an existing tool
-router.put("/:id/edit", async (req, res, next) => {
+router.get("/:id/edit", async (req, res, next) => {
 	try {
-		const toolFound = await Tool.findByIdAndUpdate(req.params.id, req.body);
-		console.log("tool found in admin edit route ----->", toolFound);
+		const toolFound = await Tool.findById(req.params.id);
+		console.log("tool found in admin prep-for-edit route ----->", toolFound);
 		// Only allow access for ADMIN
 		if (req.session.admin) {
 			res.render("tools/edit.ejs", {
@@ -103,17 +114,24 @@ router.put("/:id/edit", async (req, res, next) => {
 	}
 })
 
-// CREATE route (FOR ADMIN ONLY)
-// *******************************
-// show new page with form for adding a tool
-router.get("/new", (req, res, next) => {
-	// Only allow access for ADMIN
-	if (req.session.admin) {
-		res.render("tools/new.ejs")
-	} else {
-		res.redirect("/");
+router.put("/:id", async (req, res, next) => {
+	try {
+		const toolFound = await Tool.findByIdAndUpdate(req.params.id, req.body);
+		// console.log("tool found in admin edit route ----->", toolFound);
+		// Only allow access for ADMIN
+		if (req.session.admin) {
+			res.render("tools/edit.ejs", {
+				tool: toolFound
+			})
+		} else {
+			res.redirect("/");
+		}
+	} catch(err) {
+		next(err)
 	}
 })
+
+
 
 // create: add a new tool to the db
 router.post("/", async (req, res, next) => {

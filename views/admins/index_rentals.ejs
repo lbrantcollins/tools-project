@@ -1,9 +1,11 @@
 <% include ../partials/header.ejs %>
 
-<h1>Active Rentals</h1>
+<section id="gallery">
+      <div class="container">
 
-<a href="/admins">Return to Administrator's Home Page</a>
+<h1>All Active Rentals</h1>
 
+<p><a href="/admins">Return to Administrator's Home Page</a></p>
 
 <ul>
 	<% for(let i = 0; i < rentals.length; i++) { %>
@@ -33,5 +35,8 @@
 
 	<% } %>
 </ul>
+
+</div>
+</section>
 
 <% include ../partials/footer.ejs %>

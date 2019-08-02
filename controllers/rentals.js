@@ -53,6 +53,8 @@ router.post("/", async (req, res, next) => {
 				// totalCost: Number,
 				paid: false,
 				amountDue: 0, // don't charge the user until item returned
+				rentalCost: toolFound.rentalCost,
+				lateFee: toolFound.lateFee,
 				user: userFound,
 			   item: availableItemsFound[0]
 			});
@@ -80,23 +82,8 @@ router.get("/active", async (req, res, next) => {
 				populate: { path: 'tool' }
 		})
 
-		// Rental.find({ active: true })
-		// 	.populate({
-		// 		path: 'user', 
-		// 		match: { username: req.session.username } })
-		// 	.populate({
-		// 		path: 'item', 
-		// 		populate: { path: 'tool' }
-		// }).exec( (err, rentals) => {
-		// 	rentals = rentals.filter( function(rental) {
-		// 		return rental;
-		// 	})
-			
-		// })
-
-
-		console.log("\ndb username:", foundRentals[0]);
-		console.log("\nsession username:", req.session.username);
+		// console.log("\ndb username:", foundRentals[0]);
+		// console.log("\nsession username:", req.session.username);
 
 		// console.log("\nactive rentals index route:\n", foundRentals);
 		// console.dir(foundRentals[0].item);
@@ -118,12 +105,10 @@ router.get("/history", async (req, res, next) => {
 		// population the tool info through the item id ref
 		const foundRentals = await Rental.find({
 			active: false
-		}).populate({
-			path: 'user', 
-			match: { username: req.session.username }
-		}).populate({
-			path: 'item', 
-			populate: { path: 'tool' }
+		}).populate('user')
+			.populate({
+				path: 'item', 
+				populate: { path: 'tool' }
 		})		
 
 		// show the the history (all past rentals)

@@ -21,7 +21,7 @@
                		<% d = rental.returnDate %>
                		<p class="card-text"><span class="label-emphasis">Return Date:</span> 
                			<%= (d.getMonth() + 1) + "/" + d.getDate() + "/" + d.getFullYear() %> </p>
-               		<p class="card-text"><span class="label-emphasis">Amount Due:</span> <%=rental.amountDue.toLocaleString("en-US", {style: "currency", currency: "USD", minimumFractionDigits: 2})%>/day</p>
+               		<p class="card-text"><span class="label-emphasis">Amount Due:</span> <%=rental.amountDue.toLocaleString("en-US", {style: "currency", currency: "USD", minimumFractionDigits: 2})%></p>
                	<%}%>
                </div>
             </div>

@@ -1,13 +1,13 @@
 <% include ../partials/header.ejs %>
 
-<h1>Your Rental History</h1>
 
 <section id="gallery">
    <div class="container">
+<h1>Your Rental History</h1>
    	<div class="row">
             <% for(let i = 0; i < rentals.length; i++) { %>
-               <div class="col-lg-2 mb-2">
                   <% if (rentals[i].user.username === username) {%>
+               <div class="col-lg-2 mb-2">
                      <div class="card">
                         <img class="card-img-top" src="<%=rentals[i].item.tool.url%>" alt="<%=rentals[i].item.tool.name%>">
                         <div class="card-body">
@@ -20,9 +20,9 @@
                            </p>
                            <p class=card-text><a href="/rentals/<%=rentals[i]._id%>">More info...</a></p>
                         </div>
-                     <% } %>
                </div>
             </div>
+                     <%  } %>
          <%}%>
       </div>
    </div>
